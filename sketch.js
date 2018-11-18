@@ -4,9 +4,19 @@
 var bullets;
 var asteroids;
 var ship;
-var blocks;
 var shipImage, bulletImage, particleImage;
 var MARGIN = 40;
+var block1;
+var block2;
+var block3;
+var block4;
+var block5;
+var block6;
+var block7;
+var block8;
+var block9;
+var block10;
+var block11;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -19,8 +29,21 @@ function setup() {
   ship.maxSpeed = 600;
   ship.friction = 0.98;
   ship.setCollider('circle', 0, 0, 20);
-  
-  blocks = createSprite(0, windowHeight/5, 200, 50);
+
+block1 = createSprite(0, windowHeight/5, 200, 50);
+block2 = createSprite(200, 2 * windowHeight/5, 80, 80);
+block3 = createSprite(0, 3 * windowHeight/5, 200, 50);
+//bottom wall blocks
+block4 = createSprite((windowWidth/5), windowHeight - 200, 50, 100);
+block5 = createSprite(2*(windowWidth/5), windowHeight - 200, 50, 200);
+block6 = createSprite(3*(windowWidth/5), windowHeight - 200, 50, 200);
+//right wall blocks
+block7 = createSprite(windowWidth-100, 4*(windowHeight)/5, 100, 50);
+block8 = createSprite(windowWidth-300, 3*(windowHeight)/5, 100, 90);
+block9 = createSprite(windowWidth-200, 2*(windowHeight)/5, 200, 50);
+//top wall blocks
+block10 = createSprite(windowWidth/3, 80, 250, 50);
+block11 = createSprite(windowWidth-300, 0, 50, 100);
 
   ship.addImage('normal', shipImage);
   ship.addAnimation('thrust', 'assets/asteroids_ship0002.png', 'assets/asteroids_ship0007.png');
@@ -43,26 +66,6 @@ function draw() {
   textAlign(CENTER);
   text('Controls: Arrow Keys + X', width/2, 20);
 
-
-//left wall blocks
-rect(0, windowHeight/5, 200, 50);
-rect(200, 2 * windowHeight/5, 80, 80);
-rect(0, 3 * windowHeight/5, 200, 50);
-//bottom wall blocks
-rect((windowWidth/5), windowHeight - 200, 50, 100);
-rect(2*(windowWidth/5), windowHeight - 200, 50, 200);
-rect(3*(windowWidth/5), windowHeight - 200, 50, 200);
-//right wall blocks
-rect(windowWidth-100, 4*(windowHeight)/5, 100, 50);
-rect(windowWidth-300, 3*(windowHeight)/5, 100, 90);
-rect(windowWidth-200, 2*(windowHeight)/5, 200, 50);
-//top wall blocks
-rect(windowWidth/3, 80, 250, 50);
-rect(windowWidth-300, 0, 50, 100);
-//centre shrine
-
-
-
   for(var i=0; i<allSprites.length; i++) {
     var s = allSprites[i];
     if(s.position.x<-MARGIN) s.position.x = width+MARGIN;
@@ -72,10 +75,30 @@ rect(windowWidth-300, 0, 50, 100);
   }
 
   asteroids.overlap(bullets, asteroidHit);
-
   ship.bounce(asteroids);
-  ship.collide(blocks);
-  asteroids.collide(blocks);
+  ship.collide(block1);
+  ship.collide(block2);
+  ship.collide(block3);
+  ship.collide(block4);
+  ship.collide(block5);
+  ship.collide(block6);
+  ship.collide(block7);
+  ship.collide(block8);
+  ship.collide(block9);
+  ship.collide(block10);
+  ship.collide(block11);
+  asteroids.collide(block1);
+  asteroids.collide(block2);
+  asteroids.collide(block3);
+  asteroids.collide(block4);
+  asteroids.collide(block5);
+  asteroids.collide(block6);
+  asteroids.collide(block7);
+  asteroids.collide(block8);
+  asteroids.collide(block9);
+  asteroids.collide(block10);
+  asteroids.collide(block11);
+
 
   if(keyDown(LEFT_ARROW))
     ship.rotation -= 4;
