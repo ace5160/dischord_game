@@ -4,20 +4,23 @@
 var bullets;
 var asteroids;
 var ship;
+var blocks;
 var shipImage, bulletImage, particleImage;
 var MARGIN = 40;
 
 function setup() {
-  createCanvas(800, 600);
+  createCanvas(windowWidth, windowHeight);
 
   bulletImage = loadImage('assets/asteroids_bullet.png');
   shipImage = loadImage('assets/asteroids_ship0001.png');
   particleImage = loadImage('assets/asteroids_particle.png');
 
   ship = createSprite(width/2, height/2);
-  ship.maxSpeed = 6;
+  ship.maxSpeed = 600;
   ship.friction = 0.98;
   ship.setCollider('circle', 0, 0, 20);
+  
+  blocks = createSprite(0, windowHeight/5, 200, 50);
 
   ship.addImage('normal', shipImage);
   ship.addAnimation('thrust', 'assets/asteroids_ship0002.png', 'assets/asteroids_ship0007.png');
@@ -40,6 +43,26 @@ function draw() {
   textAlign(CENTER);
   text('Controls: Arrow Keys + X', width/2, 20);
 
+
+//left wall blocks
+rect(0, windowHeight/5, 200, 50);
+rect(200, 2 * windowHeight/5, 80, 80);
+rect(0, 3 * windowHeight/5, 200, 50);
+//bottom wall blocks
+rect((windowWidth/5), windowHeight - 200, 50, 100);
+rect(2*(windowWidth/5), windowHeight - 200, 50, 200);
+rect(3*(windowWidth/5), windowHeight - 200, 50, 200);
+//right wall blocks
+rect(windowWidth-100, 4*(windowHeight)/5, 100, 50);
+rect(windowWidth-300, 3*(windowHeight)/5, 100, 90);
+rect(windowWidth-200, 2*(windowHeight)/5, 200, 50);
+//top wall blocks
+rect(windowWidth/3, 80, 250, 50);
+rect(windowWidth-300, 0, 50, 100);
+//centre shrine
+
+
+
   for(var i=0; i<allSprites.length; i++) {
     var s = allSprites[i];
     if(s.position.x<-MARGIN) s.position.x = width+MARGIN;
@@ -51,6 +74,8 @@ function draw() {
   asteroids.overlap(bullets, asteroidHit);
 
   ship.bounce(asteroids);
+  ship.collide(blocks);
+  asteroids.collide(blocks);
 
   if(keyDown(LEFT_ARROW))
     ship.rotation -= 4;
@@ -58,7 +83,7 @@ function draw() {
     ship.rotation += 4;
   if(keyDown(UP_ARROW))
   {
-    ship.addSpeed(0.2, ship.rotation);
+    ship.addSpeed(200, ship.rotation);
     ship.changeAnimation('thrust');
   }
   else
@@ -68,7 +93,7 @@ function draw() {
   {
     var bullet = createSprite(ship.position.x, ship.position.y);
     bullet.addImage(bulletImage);
-    bullet.setSpeed(10+ship.getSpeed(), ship.rotation);
+    bullet.setSpeed(30, ship.rotation);
     bullet.life = 30;
     bullets.add(bullet);
   }
