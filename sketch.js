@@ -1,3 +1,9 @@
+// server variables  *********
+
+var dataServer;
+var pubKey = 'pub-c-74eac257-c02f-445c-8878-1855324ab89f';
+var subKey = 'sub-c-1a87f2fc-eb7f-11e8-ab71-96aca38ebf32';
+
 //asteroid clone (core mechanics only)
 //arrow keys to move + x to shoot
 
@@ -18,9 +24,24 @@ var block9;
 var block10;
 var block11;
 
+//name used to sort your messages. used like a radio station. can be called anything *********
+var channelName = "shooting";
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
+    // initialize pubnub  *********
+  dataServer = new PubNub(
+  {
+    publish_key   : pubKey,  //get these from the pubnub account online
+    subscribe_key : subKey,  
+    ssl: true  //enables a secure connection. This option has to be used if using the OCAD webspace
+  });
+    
+    //attach callbacks to the pubnub object to handle messages and connections *********
+  dataServer.addListener({ message: readIncoming, presence: whoisconnected })
+  dataServer.subscribe({channels: [channelName]});
+    
   bulletImage = loadImage('assets/asteroids_bullet.png');
   shipImage = loadImage('assets/asteroids_ship0001.png');
   particleImage = loadImage('assets/asteroids_particle.png');
@@ -163,4 +184,34 @@ function asteroidHit(asteroid, bullet) {
 
   bullet.remove();
   asteroid.remove();
+}
+
+function sendTheMessage() {
+ 
+
+// Send Data to the server to draw it in all other canvases *********
+dataServer.publish(
+    {
+      channel: channelName,
+      message: 
+      {
+       who: ship.value(), //get the value from the ships and send it as part of the message   
+      }
+    });
+
+}
+
+function readIncoming(inMessage) //when new data comes in it triggers this function, 
+{                               // this works becsuse we subscribed to the channel in setup()
+  
+  // simple error check to match the incoming to the channelName
+  if(inMessage.channel == channelName)
+  {
+    text(inMessage.message.who);
+  }
+}
+
+function whoisconnected(connectionInfo)
+{
+
 }
