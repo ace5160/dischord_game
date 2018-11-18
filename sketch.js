@@ -187,7 +187,6 @@ function asteroidHit(asteroid, bullet) {
 }
 
 function sendTheMessage() {
- 
 
 // Send Data to the server to draw it in all other canvases *********
 dataServer.publish(
