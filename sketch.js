@@ -5,6 +5,7 @@ var bullets;
 var asteroids;
 var ship;
 var blocks;
+var ctr = 0;
 var shipImage, bulletImage, particleImage;
 var MARGIN = 40;
 var block1, block, block3, block4, block5, block6, block7, block8, block9, block10, block11;
@@ -129,9 +130,18 @@ asteroids.collide(shrine4);
     bullet.setSpeed(30, ship.rotation);
     bullet.life = 30;
     bullets.add(bullet);
+    
+    //bullethitshrine
+if(bullet.overlap(shrine1))
+{
+    ctr++;
+}
   }
-
   drawSprites();
+  if(ctr>2)
+  {
+      shrine1.remove();
+  }
 
 }
 
