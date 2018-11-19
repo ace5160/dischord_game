@@ -1,47 +1,18 @@
-// server variables  *********
-
-var dataServer;
-var pubKey = 'pub-c-74eac257-c02f-445c-8878-1855324ab89f';
-var subKey = 'sub-c-1a87f2fc-eb7f-11e8-ab71-96aca38ebf32';
-
 //asteroid clone (core mechanics only)
 //arrow keys to move + x to shoot
 
 var bullets;
 var asteroids;
 var ship;
+var blocks;
 var shipImage, bulletImage, particleImage;
 var MARGIN = 40;
-var block1;
-var block2;
-var block3;
-var block4;
-var block5;
-var block6;
-var block7;
-var block8;
-var block9;
-var block10;
-var block11;
-
-//name used to sort your messages. used like a radio station. can be called anything *********
-var channelName = "shooting";
+var block1, block, block3, block4, block5, block6, block7, block8, block9, block10, block11;
+var shrine1,shrine2,shrine3,shrine4;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
-    // initialize pubnub  *********
-  dataServer = new PubNub(
-  {
-    publish_key   : pubKey,  //get these from the pubnub account online
-    subscribe_key : subKey,  
-    ssl: true  //enables a secure connection. This option has to be used if using the OCAD webspace
-  });
-    
-    //attach callbacks to the pubnub object to handle messages and connections *********
-  dataServer.addListener({ message: readIncoming, presence: whoisconnected })
-  dataServer.subscribe({channels: [channelName]});
-    
   bulletImage = loadImage('assets/asteroids_bullet.png');
   shipImage = loadImage('assets/asteroids_ship0001.png');
   particleImage = loadImage('assets/asteroids_particle.png');
@@ -66,11 +37,18 @@ block9 = createSprite(windowWidth-200, 2*(windowHeight)/5, 200, 50);
 block10 = createSprite(windowWidth/3, 80, 250, 50);
 block11 = createSprite(windowWidth-300, 0, 50, 100);
 
+//centre shrine
+shrine1 = createSprite((windowWidth/2)+100, (windowHeight/2)+50, 120, 20);
+shrine2 = createSprite((windowWidth/2)+100, (windowHeight/2)-50, 120, 20);
+shrine3 = createSprite((windowWidth/2)+30, (windowHeight/2), 20, 120);
+shrine4 = createSprite((windowWidth/2)+150, (windowHeight/2), 20, 120);
+
   ship.addImage('normal', shipImage);
   ship.addAnimation('thrust', 'assets/asteroids_ship0002.png', 'assets/asteroids_ship0007.png');
 
   asteroids = new Group();
   bullets = new Group();
+  blocks = new Group();
 
   for(var i = 0; i<8; i++) {
     var ang = random(360);
@@ -97,6 +75,7 @@ function draw() {
 
   asteroids.overlap(bullets, asteroidHit);
   ship.bounce(asteroids);
+  //ship and block collisions
   ship.collide(block1);
   ship.collide(block2);
   ship.collide(block3);
@@ -108,17 +87,27 @@ function draw() {
   ship.collide(block9);
   ship.collide(block10);
   ship.collide(block11);
-  asteroids.collide(block1);
-  asteroids.collide(block2);
-  asteroids.collide(block3);
-  asteroids.collide(block4);
-  asteroids.collide(block5);
-  asteroids.collide(block6);
-  asteroids.collide(block7);
-  asteroids.collide(block8);
-  asteroids.collide(block9);
-  asteroids.collide(block10);
-  asteroids.collide(block11);
+  //asteroid and block bouncing
+  asteroids.bounce(block1);
+  asteroids.bounce(block2);
+  asteroids.bounce(block3);
+  asteroids.bounce(block4);
+  asteroids.bounce(block5);
+  asteroids.bounce(block6);
+  asteroids.bounce(block7);
+  asteroids.bounce(block8);
+  asteroids.bounce(block9);
+  asteroids.bounce(block10);
+  asteroids.bounce(block11);
+  //ship and shrine collision
+  ship.collide(shrine1);
+  ship.collide(shrine2);
+  ship.collide(shrine3);
+  ship.collide(shrine4);
+asteroids.collide(shrine1);
+asteroids.collide(shrine2);
+asteroids.collide(shrine3);
+asteroids.collide(shrine4);
 
 
   if(keyDown(LEFT_ARROW))
@@ -184,33 +173,4 @@ function asteroidHit(asteroid, bullet) {
 
   bullet.remove();
   asteroid.remove();
-}
-
-function sendTheMessage() {
-
-// Send Data to the server to draw it in all other canvases *********
-dataServer.publish(
-    {
-      channel: channelName,
-      message: 
-      {
-       who: ship.value(), //get the value from the ships and send it as part of the message   
-      }
-    });
-
-}
-
-function readIncoming(inMessage) //when new data comes in it triggers this function, 
-{                               // this works becsuse we subscribed to the channel in setup()
-  
-  // simple error check to match the incoming to the channelName
-  if(inMessage.channel == channelName)
-  {
-    text(inMessage.message.who);
-  }
-}
-
-function whoisconnected(connectionInfo)
-{
-
 }
