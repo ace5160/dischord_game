@@ -108,8 +108,36 @@ function draw() {
  
 
   asteroids.overlap(bullets, asteroidHit);
+ 
   ship1.bounce(asteroids);
-  //ship and block collisions
+  ship2.bounce(asteroids);
+  ship3.bounce(asteroids);
+  ship4.bounce(asteroids);
+  ship5.bounce(asteroids);
+  
+  ship1.bounce(ship2);
+  ship1.bounce(ship3);
+  ship1.bounce(ship4);
+  ship1.bounce(ship5);
+  ship2.bounce(ship1);
+  ship2.bounce(ship3);
+  ship2.bounce(ship4);
+  ship2.bounce(ship5);
+  ship3.bounce(ship1);
+  ship3.bounce(ship2);
+  ship3.bounce(ship4);
+  ship3.bounce(ship5);
+  ship4.bounce(ship1);
+  ship4.bounce(ship2);
+  ship4.bounce(ship3);
+  ship4.bounce(ship5);
+  ship5.bounce(ship1);
+  ship5.bounce(ship2);
+  ship5.bounce(ship3);
+  ship5.bounce(ship4);
+  
+  
+//ship1 and block collisions
   ship1.collide(block1);
   ship1.collide(block2);
   ship1.collide(block3);
@@ -121,6 +149,60 @@ function draw() {
   ship1.collide(block9);
   ship1.collide(block10);
   ship1.collide(block11);
+  
+//ship2 and block collisions
+  ship2.collide(block1);
+  ship2.collide(block2);
+  ship2.collide(block3);
+  ship2.collide(block4);
+  ship2.collide(block5);
+  ship2.collide(block6);
+  ship2.collide(block7);
+  ship2.collide(block8);
+  ship2.collide(block9);
+  ship2.collide(block10);
+  ship2.collide(block11);
+  
+//ship3 and block collisions
+  ship3.collide(block1);
+  ship3.collide(block2);
+  ship3.collide(block3);
+  ship3.collide(block4);
+  ship3.collide(block5);
+  ship3.collide(block6);
+  ship3.collide(block7);
+  ship3.collide(block8);
+  ship3.collide(block9);
+  ship3.collide(block10);
+  ship3.collide(block11);
+  
+//ship4 and block collisions
+  ship4.collide(block1);
+  ship4.collide(block2);
+  ship4.collide(block3);
+  ship4.collide(block4);
+  ship4.collide(block5);
+  ship4.collide(block6);
+  ship4.collide(block7);
+  ship4.collide(block8);
+  ship4.collide(block9);
+  ship4.collide(block10);
+  ship4.collide(block11);
+  
+//ship5 and block collisions
+  ship5.collide(block1);
+  ship5.collide(block2);
+  ship5.collide(block3);
+  ship5.collide(block4);
+  ship5.collide(block5);
+  ship5.collide(block6);
+  ship5.collide(block7);
+  ship5.collide(block8);
+  ship5.collide(block9);
+  ship5.collide(block10);
+  ship5.collide(block11);  
+  
+  
   //asteroid and block bouncing
   asteroids.bounce(block1);
   asteroids.bounce(block2);
@@ -133,11 +215,38 @@ function draw() {
   asteroids.bounce(block9);
   asteroids.bounce(block10);
   asteroids.bounce(block11);
-  //ship and shrine collision
+  
+  //ship1 and shrine collision
   ship1.collide(shrine1);
   ship1.collide(shrine2);
   ship1.collide(shrine3);
   ship1.collide(shrine4);
+  
+  //ship2 and shrine collision
+  ship2.collide(shrine1);
+  ship2.collide(shrine2);
+  ship2.collide(shrine3);
+  ship2.collide(shrine4);
+  
+  //ship3 and shrine collision
+  ship3.collide(shrine1);
+  ship3.collide(shrine2);
+  ship3.collide(shrine3);
+  ship3.collide(shrine4);
+  
+  //ship4 and shrine collision
+  ship4.collide(shrine1);
+  ship4.collide(shrine2);
+  ship4.collide(shrine3);
+  ship4.collide(shrine4);
+  
+  //ship5 and shrine collision
+  ship5.collide(shrine1);
+  ship5.collide(shrine2);
+  ship5.collide(shrine3);
+  ship5.collide(shrine4);
+  
+  
 asteroids.collide(shrine1);
 asteroids.collide(shrine2);
 asteroids.collide(shrine3);
