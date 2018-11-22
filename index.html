@@ -39,8 +39,6 @@ var z = 0;
             var pubKey = 'pub-c-74eac257-c02f-445c-8878-1855324ab89f';
             var subKey = 'sub-c-1a87f2fc-eb7f-11e8-ab71-96aca38ebf32';
             var channelName = "ball";
-
-            var ship1;
             
             function setup(){
                 createCanvas(windowWidth, windowHeight);
@@ -58,7 +56,7 @@ var z = 0;
                 dataServer.subscribe({channels: [channelName]});
                 
                 x = windowWidth/2;
-                y = windowHeight/2;
+                y = (windowHeight - (windowHeight/5));
 
                 
             }
