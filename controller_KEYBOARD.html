@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml">
+<head>
+    <title>Controller</title>
+    <meta https-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width,user-scalable=no" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
+
+    <style>
+        body {font-family: Helvetica, Arial;}
+        #yes {display: none}
+    </style>
+    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.21.6.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
+</head>
+    
+<body>
+	<div id="content">
+        <script>
+            
+            var button1, button2;
+
+            function setup(){}
+            
+            function draw(){
+                if(keyIsDown(UP_ARROW))
+                {
+                    e = 1;
+                    PUBNUB.publish({channel: 'ball', message: e});
+            }
+
+             if(keyIsDown(DOWN_ARROW))
+                {
+                    e = 2;
+                    PUBNUB.publish({channel: 'ball', message: e});
+            }
+
+            if(keyIsDown(LEFT_ARROW))
+                {
+                    e = 3;
+                    PUBNUB.publish({channel: 'ball', message: e});
+            }
+
+            if(keyIsDown(RIGHT_ARROW))
+                {
+                    e = 4;
+                    PUBNUB.publish({channel: 'ball', message: e});
+            }
+
+
+                }
+        </script>
+	</div>
+	<script src="https://pubnub.s3.amazonaws.com/pubnub-3.0.min.js"
+	    pub-key="pub-c-74eac257-c02f-445c-8878-1855324ab89f"
+	    sub-key="sub-c-1a87f2fc-eb7f-11e8-ab71-96aca38ebf32"
+	    ssl="off"
+	    origin="pubsub.pubnub.com"
+	    id="pubnub"
+	></script>
+</body>
+</html>

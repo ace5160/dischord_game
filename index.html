@@ -31,6 +31,9 @@ var f = -25;
 var g = -300;
 var h = -20;
 var z = 0;
+var zx = 0;
+var score = 0;
+var h1 = -25;
 
             var x,y;
             var x1,y1;
@@ -62,7 +65,7 @@ var z = 0;
             }
 
             function draw(){
-                background(46,64,83);
+                background(0,0,42);
                 ellipse(x, y, 50, 50);
 
   h = h + 1;
@@ -97,8 +100,20 @@ var z = 0;
    if (g > 450) {
      g = -300;
    }
+
+   zx = zx + 2;
+   if (zx > 600)
+    { zx = 50}
    z = lerp(z,x,0.03);
+
+   h1 = h1 + 1;
+   if (h1 > 420) {
+    h1 = -20;
+  }
   
+  fill(166, 90, 59);
+  rect(0, windowHeight-40, windowWidth, 40);
+
   fill(231, 76, 60);
   ellipse(z, h, 40, 40);
   ellipse(windowWidth - 150, a, 30, 30);
@@ -109,11 +124,20 @@ var z = 0;
   ellipse(z, f, 9, 9);
   ellipse((windowWidth/5)+ 65, g, 100, 100);
 
+  fill(60,76,231);
+  ellipse(zx, h1, 40, 40);
+
   
 
 if(z>(x-10) && z<(x+10) && h>(y-10) && h<(y+10))
 {
     noLoop();
+}
+
+if(zx>(x-10) && zx<(x+10) && h1>(y-10) && h1<(y+10))
+{
+  score = score+1;
+  h1 = -10;
 }
 
             }
@@ -130,18 +154,22 @@ if(z>(x-10) && z<(x+10) && h>(y-10) && h<(y+10))
               if(inMessage.channel == channelName)
               {
 
+                //SHIP GOES UP 1
                 if ( inMessage.message == 1){
                     //console.log("1");
-                    y = y + 10;
-                }
-                if ( inMessage.message == 2){
-                    //console.log("2");
                     y = y - 10;
                 }
+                //SHIP GOES DOWN 2
+                if ( inMessage.message == 2){
+                    //console.log("2");
+                    y = y + 10;
+                }
+                //SHIP GOES LEFT 3
                 if ( inMessage.message == 3){
                     //console.log("1");
                     x = x - 10;
                 }
+                //SHIP GOES RIGHT 4
                 if ( inMessage.message == 4){
                     //console.log("1");
                     x = x + 10;
