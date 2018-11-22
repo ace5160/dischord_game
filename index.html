@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml">
+<head>
+    <title>Ball Controller</title>
+    <meta https-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
+
+
+    <style>
+        #content {position: relative;}
+    </style>
+    
+    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.21.6.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js"></script>
+    <script src="libraries/p5.play.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+    <div id="content">
+        <script>
+            
+var a = -50;
+var b = -100;
+var c = -200;
+var d = -250;
+var e = -10;
+var f = -25;
+var g = -300;
+var h = -20;
+var z = 0;
+
+            var x,y;
+            var x1,y1;
+            // server variables  *********
+            var dataServer;
+            var pubKey = 'pub-c-74eac257-c02f-445c-8878-1855324ab89f';
+            var subKey = 'sub-c-1a87f2fc-eb7f-11e8-ab71-96aca38ebf32';
+            var channelName = "ball";
+
+            var ship1;
+            
+            function setup(){
+                createCanvas(windowWidth, windowHeight);
+                background(255);
+                // initialize pubnub  *********
+                dataServer = new PubNub(
+                {
+                    publish_key   : pubKey,  //get these from the pubnub account online
+                    subscribe_key : subKey,  
+                    ssl: true  //enables a secure connection. This option has to be used if using the OCAD webspace
+                });
+
+                //attach callbacks to the pubnub object to handle messages and connections *********
+                dataServer.addListener({ message: readIncoming, presence: whoisconnected })
+                dataServer.subscribe({channels: [channelName]});
+                
+                x = windowWidth/2;
+                y = windowHeight/2;
+
+                
+            }
+
+            function draw(){
+                background(46,64,83);
+                ellipse(x, y, 50, 50);
+
+  h = h + 1;
+   if (h > 420) {
+    h = -20;
+  }
+  a = a + .5;
+   if (a > 415) {
+    a = -50;
+  }
+  b = b + .75;
+   if (b > 435) {
+    b = -100;
+  }
+  c = c + 2;
+   if (c > 405) {
+    c = -200;
+  }
+  d = d + 1;
+   if (d > 406) {
+     d = -250;
+   }
+  e = e + 1.5;
+   if (e > 410) {
+     e = -10;
+   }
+  f = f + 1.75;
+   if (f > 406) {
+     f = -25;
+   }
+  g = g + .3;
+   if (g > 450) {
+     g = -300;
+   }
+   z = lerp(z,x,0.03);
+  
+  fill(231, 76, 60);
+  ellipse(z, h, 40, 40);
+  ellipse(windowWidth - 150, a, 30, 30);
+  ellipse(windowWidth/3 , b, 70, 70);
+  ellipse(z, c, 10, 10);
+  ellipse((windowWidth/2) + 330, d, 12, 12);
+  ellipse((windowWidth/4)+20, e, 8, 8);
+  ellipse(z, f, 9, 9);
+  ellipse((windowWidth/5)+ 65, g, 100, 100);
+
+  
+
+if(z>(x-10) && z<(x+10) && h>(y-10) && h<(y+10))
+{
+    noLoop();
+}
+
+            }
+
+
+
+            ///uses built in mouseClicked function to send the data to the pubnub server
+            function sendTheMessage() {}
+
+            function readIncoming(inMessage) //when new data comes in it triggers this function, 
+            {                               // this works becsuse we subscribed to the channel in setup()
+
+              // simple error check to match the incoming to the channelName
+              if(inMessage.channel == channelName)
+              {
+
+                if ( inMessage.message == 1){
+                    //console.log("1");
+                    y = y + 10;
+                }
+                if ( inMessage.message == 2){
+                    //console.log("2");
+                    y = y - 10;
+                }
+                if ( inMessage.message == 3){
+                    //console.log("1");
+                    x = x - 10;
+                }
+                if ( inMessage.message == 4){
+                    //console.log("1");
+                    x = x + 10;
+                }
+
+              }
+            }
+
+            function whoisconnected(connectionInfo)
+            {
+
+            }
+
+            </script>
+        </div>
+    </body>
+</html>

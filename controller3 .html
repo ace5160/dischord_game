@@ -4,8 +4,8 @@
     <title>Controller</title>
     <meta https-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width,user-scalable=no" />
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
-
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    
     <style>
         body {font-family: Helvetica, Arial;}
         #yes {display: none}
@@ -23,27 +23,27 @@
             var button1, button2;
 
             function setup(){
-                button1 = createButton("Up");
+                button1 = createButton("Left");
                 button1.size(100,100);
                 button1.position(windowWidth/2, 0);
-                button1.mousePressed(up);
+                button1.mousePressed(lefty);
 
-                button2 = createButton("Down");
+                button2 = createButton("Right");
                 button2.size(100,100);
                 button2.position(windowWidth/2, windowHeight/2);
-                button2.mousePressed(down);
+                button2.mousePressed(righty);
             }
             
             function draw(){}
             
-            function up (){
-                e = 1;
+            function lefty (){
+                e = 3;
                 //console.log("yay!");
                 PUBNUB.publish({channel: 'ball', message: e});
             }
             
-            function down(){
-                e = 2;
+            function righty(){
+                e = 4;
                 PUBNUB.publish({channel: 'ball', message: e});
             }
         </script>
