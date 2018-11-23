@@ -125,10 +125,10 @@ function preload() {
    if (zx > (windowWidth-10))
     { zx = 0}
 
-   z = lerp(z,x,0.03 + ctr);
-   z1 = lerp(z1,y, 0.03 + ctr);
-   z2 = lerp(z2,(x-50), 0.03 + ctr);
-   z3 = lerp(z3, (x+250), 0.03 + ctr);
+   z = lerp(z,x,0.002 + ctr);
+   z1 = lerp(z1,y, 0.001 + ctr);
+   z2 = lerp(z2,(x-50), 0.001 + ctr);
+   z3 = lerp(z3, (x+250), 0.002 + ctr);
 
    h1 = h1 + 1;
    if (h1 > windowHeight-50) {
@@ -162,7 +162,8 @@ function preload() {
 
   //score circles
   fill(60,76,231);
-  image(pizza, h1, 40, 40);
+  image(pizza, h1, g, 40, 40);
+  image(pizza, h1 + 50, c, 40, 40);
 
   
 //enemy collision
@@ -230,22 +231,22 @@ if(zx>(x-20) && zx<(x+20) && h1>(y-20) && h1<(y+20))
                 //SHIP GOES UP 1
                 if ( inMessage.message == 1){
                     //console.log("1");
-                    y = y - 10;
+                    y = y - 20;
                 }
                 //SHIP GOES DOWN 2
                 if ( inMessage.message == 2){
                     //console.log("2");
-                    y = y + 10;
+                    y = y + 20;
                 }
                 //SHIP GOES LEFT 3
                 if ( inMessage.message == 3){
                     //console.log("1");
-                    x = x - 10;
+                    x = x - 20;
                 }
                 //SHIP GOES RIGHT 4
                 if ( inMessage.message == 4){
                     //console.log("1");
-                    x = x + 10;
+                    x = x + 20;
                 }
 
               }
