@@ -49,6 +49,8 @@ function preload() {
   evilalien = loadImage('evil_alien.png');
   heroalien = loadImage('hero_alien.png');
   bg = loadImage('background.jpg');
+  myFont = loadFont("game-over.ttf");
+
 }
 
             var x,y;
@@ -60,7 +62,8 @@ function preload() {
             var channelName = "ball";
             
             function setup(){
-                createCanvas(windowWidth, windowHeight);
+              var can = createCanvas(windowWidth, windowHeight);
+                can.position(0,0);
                 background(255);
                 // initialize pubnub  *********
                 dataServer = new PubNub(
@@ -87,6 +90,13 @@ function preload() {
             function draw(){
                 background(bg, image.width, image.height);
                 image(heroalien,x, y, 50, 50);
+                textAlign(CENTER, TOP);
+                textFont("myfont");
+                textSize(32);
+                textSize(fontsize);
+                fill(217,65,78);
+                text("Score :" + score, 0, 0);
+
 
   h = h + 1;
    if (h > windowHeight-60) {
@@ -212,6 +222,11 @@ if(zx>(x-20) && zx<(x+20) && h1>(y-20) && h1<(y+20))
 {
   score = score+1;
   h1 = -10;
+}
+
+if(keyIsDown(UP_ARROW))
+{
+
 }
 
             }
