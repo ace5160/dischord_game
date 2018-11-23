@@ -22,18 +22,34 @@
     <div id="content">
         <script>
             
-var a = -50;
+var a = -1500;
 var b = -100;
 var c = -200;
 var d = -250;
 var e = -10;
-var f = -25;
+var f = -1000;
 var g = -300;
 var h = -20;
 var z = 0;
+var z1;
+var z2;
+var z3;
 var zx = 0;
 var score = 0;
 var h1 = -25;
+var ctr;
+var pizza;
+var evilalien;
+var heroalien;
+var bg;
+
+
+function preload() {
+  pizza = loadImage('pizzadown.png');
+  evilalien = loadImage('evil_alien.png');
+  heroalien = loadImage('hero_alien.png');
+  bg = loadImage('background.jpg');
+}
 
             var x,y;
             var x1,y1;
@@ -60,81 +76,127 @@ var h1 = -25;
                 
                 x = windowWidth/2;
                 y = (windowHeight - (windowHeight/5));
+                z1 = windowWidth/2;
+                z2 = windowWidth - (windowWidth/3);
+                z3 = windowWidth - (windowWidth/6);
+                ctr = 0.0001;
 
                 
             }
 
             function draw(){
-                background(0,0,42);
-                ellipse(x, y, 50, 50);
+                background(bg);
+                ellipse(x, y, 50, 50, heroalien);
 
-  h = h + 1;
-   if (h > 420) {
+  h = h + 1 + ctr;
+   if (h > windowHeight-60) {
     h = -20;
   }
-  a = a + .5;
-   if (a > 415) {
+  a = a + 5 + ctr;
+   if (a > (windowHeight-60)) {
     a = -50;
   }
-  b = b + .75;
-   if (b > 435) {
+  b = b + 2.5;
+   if (b > (windowWidth-20)) {
     b = -100;
   }
-  c = c + 2;
-   if (c > 405) {
+  c = c + 2 + ctr;
+   if (c > (windowHeight-60)) {
     c = -200;
   }
-  d = d + 1;
-   if (d > 406) {
+  d = d + 1 + ctr;
+   if (d > (windowWidth-20)) {
      d = -250;
    }
   e = e + 1.5;
-   if (e > 410) {
+   if (e > windowHeight-60) {
      e = -10;
    }
-  f = f + 1.75;
-   if (f > 406) {
-     f = -25;
+  f = f - 1.75;
+   if (f < 2) {
+     f = windowWidth;
    }
-  g = g + .3;
-   if (g > 450) {
+  g = g + .99 + ctr;
+   if (g > (windowHeight-60)) {
      g = -300;
    }
 
    zx = zx + 2;
-   if (zx > 600)
-    { zx = 50}
-   z = lerp(z,x,0.03);
+   if (zx > (windowWidth-10))
+    { zx = 0}
+
+   z = lerp(z,x,0.03 + ctr);
+   z1 = lerp(z1,y, 0.03 + ctr);
+   z2 = lerp(z2,(x-50), 0.03 + ctr);
+   z3 = lerp(z3, (x+250), 0.03 + ctr);
 
    h1 = h1 + 1;
-   if (h1 > 420) {
+   if (h1 > windowHeight-50) {
     h1 = -20;
   }
   
   fill(166, 90, 59);
   rect(0, windowHeight-40, windowWidth, 40);
 
-  fill(231, 76, 60);
-  ellipse(z, h, 40, 40);
-  ellipse(windowWidth - 150, a, 30, 30);
-  ellipse(windowWidth/3 , b, 70, 70);
-  ellipse(z, c, 10, 10);
-  ellipse((windowWidth/2) + 330, d, 12, 12);
-  ellipse((windowWidth/4)+20, e, 8, 8);
-  ellipse(z, f, 9, 9);
-  ellipse((windowWidth/5)+ 65, g, 100, 100);
+  //enemy circles
+  fill(231, 76, 60, evilalien);
+  ellipse(z, h, 40, 40,evilalien);
+  ellipse(z1, a, 40, 40, evilalien);
+  ellipse(b , z1, 70, 70,evilalien);
+  ellipse(z2, c, 50, 50, evilalien);
+  ellipse(d, z1, 50, 50, evilalien);
+  ellipse(z3, e, 90, 90, evilalien);
+  ellipse(f, z1, 40, 40, evilalien);
+  ellipse(z1, g, 100, 100, evilalien);
 
+  //score circles
   fill(60,76,231);
-  ellipse(zx, h1, 40, 40);
+  ellipse(zx, h1, 40, 40, pizza);
 
   
-
-if(z>(x-10) && z<(x+10) && h>(y-10) && h<(y+10))
+//enemy collision
+if(z>(x-30) && z<(x+30) && h>(y-30) && h<(y+30))
 {
     noLoop();
 }
 
-if(zx>(x-10) && zx<(x+10) && h1>(y-10) && h1<(y+10))
+if(z1>(x-20) && z1<(x+20) && a>(y-20) && a<(y+20))
+{
+    noLoop();
+}
+
+if(b>(x-30) && b<(x+30) && z1>(y-30) && z1<(y+30))
+{
+    noLoop();
+}
+
+if(z2>(x-20) && z2<(x+20) && c>(y-20) && c<(y+20))
+{
+    noLoop();
+}
+
+if(d>(x-40) && d<(x+40) && z1>(y-40) && z1<(y+40))
+{
+    noLoop();
+}
+
+if(z3>(x-40) && z3<(x+40) && e>(y-40) && e<(y+40))
+{
+    noLoop();
+}
+
+if(f>(x-30) && f<(x+30) && z1>(y-30) && z1<(y+30))
+{
+    noLoop();
+}
+
+if(z1>(x-50) && z1<(x+50) && g>(y-50) && g<(y+50))
+{
+    noLoop();
+}
+
+//score
+if(zx>(x-20) && zx<(x+20) && h1>(y-20) && h1<(y+20))
 {
   score = score+1;
   h1 = -10;
