@@ -24,12 +24,12 @@
             var button1, button2;
 
             function setup(){
-                button1 = createButton("Up");
+                button1 = createImg('up.png');
                 button1.size(windowWidth,(windowHeight/2)-10);
                 button1.position(0, 0);
                 button1.mousePressed(up);
 
-                button2 = createButton("Down");
+                button2 = createImg('down.png');
                 button2.size(windowWidth,(windowHeight/2)+10);
                 button2.position(0, windowHeight/2);
                 button2.mousePressed(down);
