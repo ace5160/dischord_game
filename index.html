@@ -86,7 +86,7 @@ function preload() {
 
             function draw(){
                 background(bg);
-                ellipse(x, y, 50, 50, heroalien);
+                image(x, y, 50, 50, heroalien);
 
   h = h + 1 + ctr;
    if (h > windowHeight-60) {
@@ -139,19 +139,30 @@ function preload() {
   rect(0, windowHeight-40, windowWidth, 40);
 
   //enemy circles
-  fill(231, 76, 60, evilalien);
-  ellipse(z, h, 40, 40,evilalien);
-  ellipse(z1, a, 40, 40, evilalien);
-  ellipse(b , z1, 70, 70,evilalien);
-  ellipse(z2, c, 50, 50, evilalien);
-  ellipse(d, z1, 50, 50, evilalien);
-  ellipse(z3, e, 90, 90, evilalien);
-  ellipse(f, z1, 40, 40, evilalien);
-  ellipse(z1, g, 100, 100, evilalien);
+  fill(231, 76, 60);
+ // ellipse(z, h, 40, 40, evilalien); 
+ //  ellipse(z1, a, 40, 40, evilalien);
+ //  ellipse(b , z1, 70, 70,evilalien);
+ //  ellipse(z2, c, 50, 50, evilalien);
+ //  ellipse(d, z1, 50, 50, evilalien);
+ //  ellipse(z3, e, 90, 90, evilalien);
+ //  ellipse(f, z1, 40, 40, evilalien);
+ //  ellipse(z1, g, 100, 100, evilalien);
+
+ image(z, h, 40, 40,evilalien);
+  image(z1, a, 40, 40, evilalien);
+  image(b , z1, 70, 70,evilalien);
+  image(z2, c, 50, 50, evilalien);
+  image(d, z1, 50, 50, evilalien);
+  image(z3, e, 90, 90, evilalien);
+  image(f, z1, 40, 40, evilalien);
+  image(z1, g, 100, 100, evilalien);
+
+  //score circles
 
   //score circles
   fill(60,76,231);
-  ellipse(zx, h1, 40, 40, pizza);
+  image(zx, h1, 40, 40, pizza);
 
   
 //enemy collision
