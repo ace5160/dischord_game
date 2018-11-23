@@ -179,41 +179,49 @@ function preload() {
 //enemy collision
 if(z>(x-30) && z<(x+30) && h>(y-30) && h<(y+30))
 {
+    text("Game Over!", windowWidth, windowHeight);
     noLoop();
 }
 
 if(z1>(x-20) && z1<(x+20) && a>(y-20) && a<(y+20))
 {
+     text("Game Over!", windowWidth, windowHeight);
     noLoop();
 }
 
 if(b>(x-30) && b<(x+30) && z1>(y-30) && z1<(y+30))
 {
+     text("Game Over!", windowWidth, windowHeight);
     noLoop();
 }
 
 if(z2>(x-20) && z2<(x+20) && c>(y-20) && c<(y+20))
 {
+    text("Game Over!", windowWidth, windowHeight);
     noLoop();
 }
 
 if(d>(x-40) && d<(x+40) && z1>(y-40) && z1<(y+40))
 {
+    text("Game Over!", windowWidth, windowHeight);
     noLoop();
 }
 
 if(z3>(x-40) && z3<(x+40) && e>(y-40) && e<(y+40))
 {
+    text("Game Over!", windowWidth, windowHeight);
     noLoop();
 }
 
 if(f>(x-30) && f<(x+30) && z1>(y-30) && z1<(y+30))
 {
+    text("Game Over!", windowWidth, windowHeight);
     noLoop();
 }
 
 if(z1>(x-50) && z1<(x+50) && g>(y-50) && g<(y+50))
 {
+    text("Game Over!", windowWidth, windowHeight);
     noLoop();
 }
 
@@ -222,11 +230,6 @@ if(zx>(x-20) && zx<(x+20) && h1>(y-20) && h1<(y+20))
 {
   score = score+1;
   h1 = -10;
-}
-
-if(keyIsDown(UP_ARROW))
-{
-
 }
 
             }
