@@ -23,13 +23,13 @@
 
             function setup(){
                 button1 = createButton("Left");
-                button1.size(100,100);
-                button1.position(windowWidth/2, 0);
+                button1.size(windowWidth,(windowHeight/2)-10);
+                button1.position(0,0);
                 button1.mousePressed(lefty);
 
                 button2 = createButton("Right");
-                button2.size(100,100);
-                button2.position(windowWidth/2, windowHeight/2);
+                button2.size(windowWidth,(windowHeight/2)+10);
+                button2.position(0, windowHeight/2);
                 button2.mousePressed(righty);
             }
             
